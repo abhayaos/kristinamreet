@@ -9,69 +9,90 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root{
+  --accent:#ff2b78;
+  --white: #ffffff;
+}
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
+html,body{height:100%;}
 body{
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-overflow:hidden;
-background:linear-gradient(-45deg,#ff4b91,#ff758c,#8b5cf6,#3b82f6);
-background-size:400% 400%;
-animation:bg 12s ease infinite;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  overflow:hidden;
+  background: #0f172a;
+  color:var(--white);
+  position:relative;
 }
 
-@keyframes bg{
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+/* CRAZY animated background: rotating conic gradient + moving blurred blobs + starfield */
+.bg-rotator{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  background: conic-gradient(from 0deg, #ff4b91, #ff758c, #8b5cf6, #3b82f6, #5bffcc, #ffde59, #ff4b91);
+  filter:blur(40px) saturate(140%);
+  animation:spin 20s linear infinite;
+  mix-blend-mode:screen;
+  opacity:0.85;
+}
+@keyframes spin{from{transform:rotate(0deg);} to{transform:rotate(360deg);}}
+
+/* Additional animated blobs */
+.bg-blob{
+  position:fixed;
+  width:60vmax;
+  height:60vmax;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background: radial-gradient(circle at 30% 30%, rgba(255,80,130,0.25), transparent 20%),
+              radial-gradient(circle at 70% 70%, rgba(80,120,255,0.2), transparent 25%);
+  filter:blur(70px);
+  z-index:-4;
+  animation:blobmove 18s ease-in-out infinite;
+  opacity:0.9;
+}
+@keyframes blobmove{
+  0%{transform:translate(-48%,-52%) scale(1);} 
+  50%{transform:translate(-52%,-48%) scale(1.05);} 
+  100%{transform:translate(-48%,-52%) scale(1);} 
 }
 
-body::before,
-body::after{
-content:"";
-position:absolute;
-width:450px;
-height:450px;
-border-radius:50%;
-filter:blur(120px);
-z-index:-2;
+/* subtle noise / stars */
+.stars{
+  position:fixed;inset:0;pointer-events:none;z-index:-3;opacity:0.25;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode:overlay;
+  animation:twinkle 6s linear infinite;
 }
+@keyframes twinkle{0%{opacity:.18;}50%{opacity:.28;}100%{opacity:.18;}}
 
-body::before{
-background:#ff3b8d;
-top:-150px;
-left:-150px;
-}
-
-body::after{
-background:#5b5fff;
-bottom:-150px;
-right:-150px;
-}
-
+/* Keep hearts but let them blend into background with different blend modes */
 .hearts{
-position:absolute;
-width:100%;
-height:100%;
-overflow:hidden;
-z-index:-1;
+  position:absolute;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:-1;
+  mix-blend-mode:screen;
 }
-
 .hearts span{
-position:absolute;
-bottom:-80px;
-font-size:30px;
-animation:float linear infinite;
-color:rgba(255,255,255,.55);
+  position:absolute;
+  bottom:-80px;
+  font-size:30px;
+  animation:float linear infinite;
+  color:rgba(255,255,255,.85);
+  text-shadow:0 6px 20px rgba(0,0,0,.35);
 }
-
 .hearts span:nth-child(1){left:8%;animation-duration:10s;}
 .hearts span:nth-child(2){left:20%;animation-duration:14s;}
 .hearts span:nth-child(3){left:35%;animation-duration:12s;}
@@ -79,196 +100,136 @@ color:rgba(255,255,255,.55);
 .hearts span:nth-child(5){left:65%;animation-duration:13s;}
 .hearts span:nth-child(6){left:80%;animation-duration:11s;}
 .hearts span:nth-child(7){left:92%;animation-duration:15s;}
+@keyframes float{0%{transform:translateY(0) rotate(0deg);opacity:0;}15%{opacity:1;}100%{transform:translateY(-120vh) rotate(360deg);opacity:0;}}
 
-@keyframes float{
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:0;
-}
-15%{
-opacity:1;
-}
-100%{
-transform:translateY(-120vh) rotate(360deg);
-opacity:0;
-}
-}
-
-.card{
-width:90%;
-max-width:450px;
-padding:35px;
-text-align:center;
-border-radius:25px;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.2);
-box-shadow:0 20px 50px rgba(0,0,0,.3);
-color:white;
+/* Remove boxed card effect: no background, no border, no shadow. Use soft neon text + glass-like outlineless look */
+.container{
+  width:90%;
+  max-width:720px;
+  padding:40px 30px;
+  text-align:center;
+  border-radius:16px;
+  background:transparent; /* transparent so no box */
+  color:var(--white);
+  z-index:10;
 }
 
 h1{
-margin-bottom:10px;
-font-size:2rem;
+  margin-bottom:12px;
+  font-size:2.4rem;
+  letter-spacing:1px;
+  text-shadow: 0 6px 30px rgba(139,92,246,0.45), 0 2px 8px rgba(0,0,0,0.5);
+}
+.subtitle{margin-bottom:22px;opacity:.95;font-weight:600;}
+
+/* Buttons: ghost/neon style, no filled boxes */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 18px;
+  margin:8px 6px;
+  border-radius:999px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.12);
+  color:var(--white);
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+  text-decoration:none;
+  box-shadow:0 6px 30px rgba(139,92,246,0.12);
+}
+.btn:hover{transform:translateY(-6px);box-shadow:0 16px 50px rgba(139,92,246,0.18);}
+
+/* Result view: big heart and message, also not boxed */
+#result{display:none;}
+.bigHeart{font-size:84px;animation:beat 1s infinite;text-shadow:0 10px 40px rgba(255,43,120,0.18);}
+@keyframes beat{50%{transform:scale(1.18);}}
+
+.message{margin:18px 0;line-height:1.6;font-size:1.05rem;}
+
+/* Make layout responsive */
+@media (max-width:420px){
+  h1{font-size:1.6rem}
+  .bigHeart{font-size:60px}
 }
 
-.subtitle{
-margin-bottom:25px;
-opacity:.9;
-}
+/* accent underline */
+.underline{display:inline-block;height:6px;width:90px;border-radius:6px;margin-top:8px;background:linear-gradient(90deg,var(--accent),#ff9eb0)}
 
-button{
-width:100%;
-padding:15px;
-margin:10px 0;
-border:none;
-border-radius:14px;
-background:white;
-color:#ff2b78;
-font-size:17px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
-}
-
-button:hover{
-transform:translateY(-4px);
-}
-
-#result{
-display:none;
-}
-
-.bigHeart{
-font-size:70px;
-animation:beat 1s infinite;
-}
-
-@keyframes beat{
-50%{
-transform:scale(1.2);
-}
-}
-
-.message{
-margin:20px 0;
-line-height:1.8;
-}
 </style>
 </head>
 
 <body>
 
-<div class="hearts">
-<span>❤️</span>
-<span>💕</span>
-<span>💖</span>
-<span>💗</span>
-<span>💘</span>
-<span>💞</span>
-<span>💓</span>
+<div class="bg-rotator" aria-hidden="true"></div>
+<div class="bg-blob" aria-hidden="true"></div>
+<div class="stars" aria-hidden="true"></div>
+
+<div class="hearts" aria-hidden="true">
+  <span>❤️</span>
+  <span>💕</span>
+  <span>💖</span>
+  <span>💗</span>
+  <span>💘</span>
+  <span>💞</span>
+  <span>💓</span>
 </div>
 
-<div class="card" id="home">
+<div class="container" id="home">
 
-<h1>❤️ Kristina & Amrit ❤️</h1>
+  <h1>❤️ Kristina & Amrit ❤️</h1>
+  <div class="underline" aria-hidden="true"></div>
 
-<p class="subtitle">
-Choose who you are.
-</p>
+  <p class="subtitle">
+    Choose who you are.
+  </p>
 
-<button onclick="showMessage('kristina')">
-🌸 I'm Kristina Thapa
-</button>
-
-<button onclick="showMessage('amrit')">
-🤍 I'm Amrit Chuwai
-</button>
+  <div>
+    <button class="btn" onclick="showMessage('kristina')">🌸 I'm Kristina Thapa</button>
+    <button class="btn" onclick="showMessage('amrit')">🤍 I'm Amrit Chuwai</button>
+  </div>
 
 </div>
 
-<div class="card" id="result">
+<div class="container" id="result">
 
-<div class="bigHeart">❤️</div>
-
-<h2 id="title"></h2>
-
-<p class="message" id="message"></p>
-
-<button onclick="goBack()">⬅ Back</button>
+  <div class="bigHeart">❤️</div>
+  <h2 id="title"></h2>
+  <p class="message" id="message"></p>
+  <div style="margin-top:8px">
+    <button class="btn" onclick="goBack()">⬅ Back</button>
+  </div>
 
 </div>
 
 <script>
-
 function showMessage(person){
+  document.getElementById("home").style.display="none";
+  document.getElementById("result").style.display="block";
 
-document.getElementById("home").style.display="none";
-document.getElementById("result").style.display="block";
-
-if(person==="kristina"){
-
-document.getElementById("title").innerHTML="Hi Kristina ❤️";
-
-document.getElementById("message").innerHTML=
-`You are the best part of my life.
-
-Every smile of yours makes my day brighter.
-
-No matter what happens,
-I'll always stand beside you.
-
-❤️ Forever Yours,
-<b>Amrit</b>`;
-
-}else{
-
-document.getElementById("title").innerHTML="Hi Amrit ❤️";
-
-document.getElementById("message").innerHTML=
-`Every moment with you feels special.
-
-Thank you for always caring for me,
-making me smile,
-and standing beside me.
-
-You'll always have a special place in my heart.
-
-❤️ Love Always,
-<b>Kristina</b>`;
-
-}
-
+  if(person==="kristina"){
+    document.getElementById("title").innerHTML="Hi Kristina ❤️";
+    document.getElementById("message").innerHTML=`You are the best part of my life.<br><br>
+Every smile of yours makes my day brighter.<br><br>
+No matter what happens,<br>
+I'll always stand beside you.<br><br>
+❤️ Forever Yours,<br><b>Amrit</b>`;
+  } else {
+    document.getElementById("title").innerHTML="Hi Amrit ❤️";
+    document.getElementById("message").innerHTML=`Every moment with you feels special.<br><br>
+Thank you for always caring for me,<br>
+making me smile,<br>
+and standing beside me.<br><br>
+You'll always have a special place in my heart.<br><br>
+❤️ Love Always,<br><b>Kristina</b>`;
+  }
 }
 
 function goBack(){
-document.getElementById("result").style.display="none";
-document.getElementById("home").style.display="block";
-}
-
-</script>
-
-</body>
-</html>
-function goBack(){
-document.getElementById("result").style.display="none";
-document.getElementById("home").style.display="block";
-}
-
-</script>
-
-</body>
-</html>document.getElementById("title").innerHTML="Hi Amrit ❤️";
-
-document.getElementById("message").innerHTML=
-`Every moment with you feels special.
-Thank you for always caring for me,
-making me smile, and standing beside me.
-You'll always have a special place in my heart. ❤️<br><br>
-— Love, Kristina`;
-
-}
-
+  document.getElementById("result").style.display="none";
+  document.getElementById("home").style.display="block";
 }
 </script>
 
