@@ -3,168 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Kristina ❤️ Amrit</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    background:linear-gradient(-45deg,#ff4d8d,#ff7eb3,#8f5cff,#3f87ff);
-    background-size:400% 400%;
-    animation:gradient 15s ease infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+overflow:hidden;
+background:linear-gradient(-45deg,#ff4b91,#ff758c,#8b5cf6,#3b82f6);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
 }
 
-@keyframes gradient{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
 }
 
-/* Glowing Background */
 body::before,
 body::after{
-    content:"";
-    position:absolute;
-    width:450px;
-    height:450px;
-    border-radius:50%;
-    filter:blur(120px);
-    z-index:-2;
+content:"";
+position:absolute;
+width:450px;
+height:450px;
+border-radius:50%;
+filter:blur(120px);
+z-index:-2;
 }
 
 body::before{
-    background:#ff3d8b;
-    top:-150px;
-    left:-150px;
+background:#ff3b8d;
+top:-150px;
+left:-150px;
 }
 
 body::after{
-    background:#5a67ff;
-    bottom:-150px;
-    right:-150px;
+background:#5b5fff;
+bottom:-150px;
+right:-150px;
 }
 
-/* Floating Hearts */
 .hearts{
-    position:absolute;
-    inset:0;
-    overflow:hidden;
-    z-index:-1;
+position:absolute;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
 }
 
 .hearts span{
-    position:absolute;
-    bottom:-100px;
-    color:rgba(255,255,255,.5);
-    animation:float linear infinite;
+position:absolute;
+bottom:-80px;
+font-size:30px;
+animation:float linear infinite;
+color:rgba(255,255,255,.55);
 }
 
-.hearts span:nth-child(1){left:5%;font-size:20px;animation-duration:10s;}
-.hearts span:nth-child(2){left:15%;font-size:35px;animation-duration:14s;}
-.hearts span:nth-child(3){left:28%;font-size:25px;animation-duration:12s;}
-.hearts span:nth-child(4){left:40%;font-size:40px;animation-duration:15s;}
-.hearts span:nth-child(5){left:52%;font-size:22px;animation-duration:11s;}
-.hearts span:nth-child(6){left:65%;font-size:34px;animation-duration:13s;}
-.hearts span:nth-child(7){left:80%;font-size:28px;animation-duration:16s;}
-.hearts span:nth-child(8){left:93%;font-size:38px;animation-duration:12s;}
+.hearts span:nth-child(1){left:8%;animation-duration:10s;}
+.hearts span:nth-child(2){left:20%;animation-duration:14s;}
+.hearts span:nth-child(3){left:35%;animation-duration:12s;}
+.hearts span:nth-child(4){left:50%;animation-duration:16s;}
+.hearts span:nth-child(5){left:65%;animation-duration:13s;}
+.hearts span:nth-child(6){left:80%;animation-duration:11s;}
+.hearts span:nth-child(7){left:92%;animation-duration:15s;}
 
 @keyframes float{
-    from{
-        transform:translateY(0) rotate(0deg);
-        opacity:0;
-    }
-    15%{
-        opacity:1;
-    }
-    to{
-        transform:translateY(-120vh) rotate(360deg);
-        opacity:0;
-    }
+0%{
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+15%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
+}
 }
 
 .card{
-    width:90%;
-    max-width:460px;
-    padding:35px;
-    border-radius:28px;
-    text-align:center;
-    background:rgba(255,255,255,.15);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(255,255,255,.2);
-    box-shadow:0 20px 50px rgba(0,0,0,.35);
-    color:#fff;
+width:90%;
+max-width:450px;
+padding:35px;
+text-align:center;
+border-radius:25px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.2);
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+color:white;
 }
 
 h1{
-    font-size:2rem;
-    margin-bottom:10px;
-}
-
-h2{
-    margin-bottom:15px;
+margin-bottom:10px;
+font-size:2rem;
 }
 
 .subtitle{
-    opacity:.9;
-    margin-bottom:25px;
+margin-bottom:25px;
+opacity:.9;
 }
 
 button{
-    width:100%;
-    padding:15px;
-    margin:10px 0;
-    border:none;
-    border-radius:14px;
-    font-size:17px;
-    font-weight:600;
-    cursor:pointer;
-    color:#ff2b77;
-    background:#fff;
-    transition:.3s;
+width:100%;
+padding:15px;
+margin:10px 0;
+border:none;
+border-radius:14px;
+background:white;
+color:#ff2b78;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
 }
 
 button:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 25px rgba(255,255,255,.35);
+transform:translateY(-4px);
 }
 
 #result{
-    display:none;
+display:none;
 }
 
-.message{
-    line-height:1.8;
-    margin:20px 0;
-    font-size:16px;
-}
-
-.big-heart{
-    font-size:70px;
-    animation:beat 1s infinite;
+.bigHeart{
+font-size:70px;
+animation:beat 1s infinite;
 }
 
 @keyframes beat{
-    50%{
-        transform:scale(1.2);
-    }
+50%{
+transform:scale(1.2);
+}
 }
 
-footer{
-    margin-top:20px;
-    font-size:13px;
-    opacity:.8;
+.message{
+margin:20px 0;
+line-height:1.8;
 }
 </style>
 </head>
@@ -176,10 +164,9 @@ footer{
 <span>💕</span>
 <span>💖</span>
 <span>💗</span>
-<span>❤️</span>
+<span>💘</span>
 <span>💞</span>
 <span>💓</span>
-<span>💘</span>
 </div>
 
 <div class="card" id="home">
@@ -187,10 +174,8 @@ footer{
 <h1>❤️ Kristina & Amrit ❤️</h1>
 
 <p class="subtitle">
-Every love story is beautiful, but yours deserves its own little website.
+Choose who you are.
 </p>
-
-<h3>Who are you?</h3>
 
 <button onclick="showMessage('kristina')">
 🌸 I'm Kristina Thapa
@@ -200,15 +185,11 @@ Every love story is beautiful, but yours deserves its own little website.
 🤍 I'm Amrit Chuwai
 </button>
 
-<footer>
-Made with ❤️ for a beautiful couple.
-</footer>
-
 </div>
 
 <div class="card" id="result">
 
-<div class="big-heart">❤️</div>
+<div class="bigHeart">❤️</div>
 
 <h2 id="title"></h2>
 
@@ -230,46 +211,45 @@ if(person==="kristina"){
 document.getElementById("title").innerHTML="Hi Kristina ❤️";
 
 document.getElementById("message").innerHTML=
-`
-You are the reason my ordinary days feel magical.
-Every smile you give becomes my favorite memory.
+`You are the best part of my life.
 
-Thank you for loving me, supporting me,
-and making life brighter every single day.
+Every smile of yours makes my day brighter.
 
-No matter where life takes us,
-I'll always choose you.
+No matter what happens,
+I'll always stand beside you.
 
-Forever yours,
-<b>Amrit ❤️</b>
-`;
+❤️ Forever Yours,
+<b>Amrit</b>`;
 
 }else{
 
 document.getElementById("title").innerHTML="Hi Amrit ❤️";
 
 document.getElementById("message").innerHTML=
-`
-You make me feel safe,
-understood,
-and genuinely happy.
+`Every moment with you feels special.
 
-Thank you for always being there,
-for every laugh,
-every memory,
-and every little moment.
+Thank you for always caring for me,
+making me smile,
+and standing beside me.
 
-No matter what happens,
-my heart will always smile because of you.
+You'll always have a special place in my heart.
 
-With all my love,
-<b>Kristina ❤️</b>
-`;
+❤️ Love Always,
+<b>Kristina</b>`;
 
 }
 
 }
 
+function goBack(){
+document.getElementById("result").style.display="none";
+document.getElementById("home").style.display="block";
+}
+
+</script>
+
+</body>
+</html>
 function goBack(){
 document.getElementById("result").style.display="none";
 document.getElementById("home").style.display="block";
